@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		FB510D4B207B79130063290E /* Sodoku */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sodoku; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB510D4E207B79130063290E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FB510D55207B79EA0063290E /* Puzzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Puzzle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				FB510D4E207B79130063290E /* main.cpp */,
+				FB510D55207B79EA0063290E /* Puzzle.h */,
 			);
 			path = Sodoku;
 			sourceTree = "<group>";
