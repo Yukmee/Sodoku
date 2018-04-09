@@ -14,7 +14,9 @@ int main(int argc, const char * argv[]) {
         construct(argv[2]);
 
     } else if (strcmp(argv[1], "-s")  == 0) {
+        
         solve();
+        
     }
     
     return 0;
