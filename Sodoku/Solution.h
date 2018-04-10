@@ -14,6 +14,8 @@ struct Pos {
 typedef deque <Pos> qpos;
 qpos Q;        // 记录要放置数字的位置
 
+// TODO: Read from file
+
 // 九宫格数组，0表示玩家要放置数字的位置
 int sudoku[MAX_SIZE][MAX_SIZE] = {
     {0, 0, 3, 0, 5, 0, 0, 0, 9},
