@@ -4,7 +4,7 @@ using namespace std;
 
 int sudokuMatrix[9][9];
 int sudokuMatrixCount = 0, priNumber = 0;
-FILE *sudokuTxt;
+
 
 // MARK: -Helper Methods:
 int generateInteger(const char *string) {

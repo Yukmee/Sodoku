@@ -1,6 +1,6 @@
 #include <iostream>
+#include <fstream>
 #include <deque>
-
 using namespace std;
 
 const int MAX_SIZE = 9;        // 九宫格
@@ -28,21 +28,19 @@ int sudoku[MAX_SIZE][MAX_SIZE] = {
 };
 
 void printSudoku() {
-    cout << "-------------------------" << endl;
+    
+    ofstream solutionTxtFile;
+    solutionTxtFile.open ("sudoku.txt");
+    
     for (int i = 0; i < MAX_SIZE; i++) {
         for (int j = 0; j <MAX_SIZE; j++) {
-            if (j % 3 == 0) {
-                cout << "| ";
-            }
-            cout << sudoku[i][j] << " ";
+
+            solutionTxtFile << sudoku[i][j] << " ";
         }
-        cout << "| ";
-        
-        cout << endl;
-        if ( (i+1) % 3 == 0 ) {
-            cout << "-------------------------" << endl;
-        }
+        solutionTxtFile << endl;
     }
+    
+    solutionTxtFile.close();
 }
 
 bool check(Pos p, int n) {
