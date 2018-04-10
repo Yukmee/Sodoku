@@ -7,7 +7,8 @@
 
 int main(int argc, const char * argv[]) {
     
-    fopen("sudoku.txt", "w");
+//    fopen("sudoku.txt", "w");
+    
 
     if (strcmp(argv[1], "-c")  == 0) {
         

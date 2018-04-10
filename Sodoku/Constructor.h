@@ -1,9 +1,10 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
-int sd[9][9];
-int shudu_num = 0, pri_number = 0;
-FILE *wri;
+int sudokuMatrix[9][9];
+int sudokuMatrixCount = 0, priNumber = 0;
+FILE *sudokuTxt;
 
 // MARK: -Helper Methods:
 int generateInteger(const char *string) {
@@ -11,7 +12,7 @@ int generateInteger(const char *string) {
     int multiplier = 1;
     for (unsigned int i = 0; i < strlen(string); i++) {
         if (string[i] > '9' || string[i] < '0') {
-            printf("Number Error!\n");
+            cout << "InputError! Type<int> please." << endl;
             exit(0);
         }
     }
@@ -20,33 +21,38 @@ int generateInteger(const char *string) {
         multiplier *= 10;
     }
     if (integer <= 0 || integer > 1000000) {
-        printf("Number Error!\n");
+        cout << "InputError! Use a smaller integer please." << endl;
         exit(0);
     }
     return integer;
 }
 
 
-void pr() {
+void print() {
+
+    ofstream sudokuTxtFile;
+    sudokuTxtFile.open ("sudoku.txt");
+
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
-            
-            fprintf(wri,"%d", sd[i][j]);
+            sudokuTxtFile << sudokuMatrix[i][j];
             if (j != 8) {
-                fprintf(wri," ");
+                sudokuTxtFile << " ";
             }
         }
-        fprintf(wri, "\n");
+        sudokuTxtFile << endl;
     }
+    sudokuTxtFile.close();
 }
 
-int judge(int x, int y) {
+
+bool judge(int x, int y) {
     for (int i = 0; i < 9; i++) {
-        if (sd[x][i] == sd[x][y] && y != i) {
-            return 1;
+        if (sudokuMatrix[x][i] == sudokuMatrix[x][y] && y != i) {
+            return true;
         }
-        if (sd[i][y] == sd[x][y] && x != i) {
-            return 1;
+        if (sudokuMatrix[i][y] == sudokuMatrix[x][y] && x != i) {
+            return true;
         }
     }
     int n1 = x / 3;
@@ -55,35 +61,41 @@ int judge(int x, int y) {
     n2 *= 3;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            if (sd[n1 + i][n2 + j] == sd[x][y] && n1 + i != x&&n2 + j != y) {
-                return 1;
+            if (sudokuMatrix[n1 + i][n2 + j] == sudokuMatrix[x][y] && n1 + i != x&&n2 + j != y) {
+                return true;
             }
         }
     }
-    return 0;
+    return false;
 }
 
 
-void DFS2(int x, int y) {
+void dfs(int x, int y) {
     for (int i = 1; i <= 9; i++) {
-        sd[x][y] = i;
+        sudokuMatrix[x][y] = i;
         if (judge(x, y) == 0) {
             if (x == 8 && y == 8) {
-                pr();
-                pri_number++;
-                if (pri_number == shudu_num) {
-                    printf(" ˝∂¿…˙≥…≥…π¶£°\n");
+                print();
+                priNumber++;
+                if (priNumber == sudokuMatrixCount) {
+                    // DEBUG:
+                    cout << "\n*************Constructed!*************\n" << endl;
                     exit(0);
                 }
-                fprintf(wri, "\n");
+                
+                ofstream sudokuTxtFile;
+                sudokuTxtFile.open ("sudoku.txt");
+                sudokuTxtFile << endl;
+                sudokuTxtFile.close();
+                
             }
             else if (y == 8) {
-                DFS2(x + 1, 0);
-                sd[x + 1][0] = 0;
+                dfs(x + 1, 0);
+                sudokuMatrix[x + 1][0] = 0;
             }
             else if (y != 8) {
-                DFS2(x, y + 1);
-                sd[x][y + 1] = 0;
+                dfs(x, y + 1);
+                sudokuMatrix[x][y + 1] = 0;
             }
         }
     }
@@ -91,17 +103,24 @@ void DFS2(int x, int y) {
 
 
 
-void shud(int n) {
-    shudu_num = n;
-    sd[0][0] = 3;
-    pri_number = 0;
-    DFS2(0, 1);
+void sudokuConstructor(int n) {
+    sudokuMatrixCount = n;
+    sudokuMatrix[0][0] = 2; // (4 + 6) % 9 + 1 = 2
+    priNumber = 0;
+    dfs(0, 1);
 }
 
 // MARK: - Constructor:
 void construct(const char *string) {
-    printf("I am the constructor.\n");
-    int integer = generateInteger(string);
-    shud(integer);
     
+    // DEBUG:
+    cout << "\n*************I am the constructor.*************\n" << endl;
+    
+    int integer = generateInteger(string);
+    
+    sudokuConstructor(integer);
 }
+
+
+
+
