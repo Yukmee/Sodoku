@@ -6,9 +6,6 @@
 
 
 int main(int argc, const char * argv[]) {
-    
-//    fopen("sudoku.txt", "w");
-    
 
     if (strcmp(argv[1], "-c")  == 0) {
         
@@ -16,7 +13,7 @@ int main(int argc, const char * argv[]) {
 
     } else if (strcmp(argv[1], "-s")  == 0) {
         
-        solve();
+        solve(argv[2]);
         
     }
     
