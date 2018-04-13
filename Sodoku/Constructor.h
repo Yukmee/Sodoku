@@ -31,7 +31,7 @@ int generateInteger(const char *string) {
 void print() {
 
     ofstream sudokuTxtFile;
-    sudokuTxtFile.open ("sudoku.txt");
+    sudokuTxtFile.open ("sudoku.txt", ios_base::app);
 
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
@@ -42,7 +42,8 @@ void print() {
         }
         sudokuTxtFile << endl;
     }
-    sudokuTxtFile.close();
+    
+    sudokuTxtFile << endl;
 }
 
 
@@ -78,15 +79,10 @@ void dfs(int x, int y) {
                 print();
                 priNumber++;
                 if (priNumber == sudokuMatrixCount) {
-                    // DEBUG:
-                    cout << "\n*************Constructed!*************\n" << endl;
+                    cout << "\n*************Constructed!*************\n" << endl; // ******************DEBUG******************
                     exit(0);
                 }
                 
-                ofstream sudokuTxtFile;
-                sudokuTxtFile.open ("sudoku.txt");
-                sudokuTxtFile << endl;
-                sudokuTxtFile.close();
                 
             }
             else if (y == 8) {
@@ -101,8 +97,6 @@ void dfs(int x, int y) {
     }
 }
 
-
-
 void sudokuConstructor(int n) {
     sudokuMatrixCount = n;
     sudokuMatrix[0][0] = 2; // (4 + 6) % 9 + 1 = 2
@@ -113,12 +107,9 @@ void sudokuConstructor(int n) {
 // MARK: - Constructor:
 void construct(const char *string) {
     
-    // DEBUG:
-    cout << "\n*************I am the constructor.*************\n" << endl;
-    
     int integer = generateInteger(string);
-    
     sudokuConstructor(integer);
+    
 }
 
 

@@ -16,39 +16,29 @@ struct Pos {
 typedef deque <Pos> qpos;
 qpos Q;        // 记录要放置数字的位置
 
-
-// 九宫格数组，0表示玩家要放置数字的位置
-//int sudoku[MAX_SIZE][MAX_SIZE] = {
-//    {0, 0, 3, 0, 5, 0, 0, 0, 9},
-//    {0, 0, 0, 1, 0, 0, 0, 2, 5},
-//    {0, 8, 0, 0, 3, 7, 0, 0, 0},
-//    {0, 0, 0, 0, 0, 8, 0, 9, 7},
-//    {2, 0, 0, 0, 6, 0, 0, 0, 4},
-//    {9, 4, 0, 0, 0, 0, 8, 0, 1},
-//    {0, 0, 0, 6, 9, 0, 4, 0, 0},
-//    {8, 0, 0, 0, 0, 5, 0, 0, 0},
-//    {6, 0, 0, 0, 1, 0, 9, 0, 0},
-//};
-
+/// Sudoku Matrix (9 X 9)
 int sudoku[MAX_SIZE][MAX_SIZE] = {0};
 
 void printSudoku(int round) {
     
     ofstream solutionTxtFile;
-//    solutionTxtFile.open ("sudoku.txt");
-    solutionTxtFile.open ("sudokuSolution.txt"); // ******************DEBUG******************
-    
-    solutionTxtFile << round << endl; // ******************DEBUG******************
+    solutionTxtFile.open ("sudokuSolution.txt", ios_base::app); // ******************DEBUG******************
     
     for (int i = 0; i < MAX_SIZE; i++) {
-        for (int j = 0; j <MAX_SIZE; j++) {
-
-            solutionTxtFile << sudoku[i][j] << " ";
+        for (int j = 0; j < MAX_SIZE; j++) {
+            
+            if (j != MAX_SIZE - 1) {
+                solutionTxtFile << sudoku[i][j] << " ";
+            } else {
+                solutionTxtFile << sudoku[i][j];
+            }
         }
+        
         solutionTxtFile << endl;
     }
     
-    solutionTxtFile.close();
+    solutionTxtFile << endl;
+    
 }
 
 bool check(Pos p, int n) {
@@ -77,7 +67,7 @@ bool check(Pos p, int n) {
 bool place(qpos & Q) {
     // 递归结束条件为没有要断续放置数字的位置
     if (Q.empty()) {
-        printSudoku(ktRound);
+        printSudoku(ktRound++);
         return true;
     }
     Pos cur(Q.front().row, Q.front().col);    // 当前需要放置的位置信息
@@ -103,43 +93,51 @@ void solve(const char *absolutePath) {
     ifstream inFile;
     inFile.open(absolutePath);
 
-    while (!inFile.eof()) {
-        
+    int index = 0; // DEBUG
+    
+    while (1) {
+        bool breakWhileFlag = false;
         for (int i = 0; i < MAX_SIZE; i++) {
             for (int j = 0; j < MAX_SIZE; j++) {
-                
                 if (!inFile.eof()) {
                     char digit;
                     inFile >> digit;
                     sudoku[i][j] = digit - '0';
                     
-                    // MARK:- ******************DEBUG******************
-                    if (j != 8) {
-                        cout << sudoku[i][j] << " ";
-                    } else {
-                        cout << sudoku[i][j] << endl;
-                    }
+                    index++; // DEBUG
                     
+                } else {
+                    breakWhileFlag =true;
+                    break;
                 }
-                
+            }
+            
+            if (breakWhileFlag) {
+                break;
             }
         }
         
-        // Q中保存需要放置数字的位置
-        for (int i = 0; i < MAX_SIZE; i++) {
-            for (int j = 0; j < MAX_SIZE; j++) {
-                if (0 == sudoku[i][j]) {
-                    Q.push_back(Pos(i, j));
+        if (index % 81 == 0) {
+            
+            /*xxxxxxxxxxxxxxxxxxxxxxxDON'T EVER TRY TO MODIFYxxxxxxxxxxxxxxxxxxxxxxxx*/
+            // Q中保存需要放置数字的位置
+            for (int i = 0; i < MAX_SIZE; i++) {
+                for (int j = 0; j < MAX_SIZE; j++) {
+                    if (0 == sudoku[i][j]) {
+                        Q.push_back(Pos(i, j));
+                    }
                 }
             }
+            place(Q);
+            /*xxxxxxxxxxxxxxxxxxxxxxxDON'T EVER TRY TO MODIFYxxxxxxxxxxxxxxxxxxxxxxxx*/
+            
         }
-        place(Q);
         
-        ktRound++; // ******************DEBUG******************
+        if (breakWhileFlag) {
+            break;
+        }
+        
     }
-    
-    
-    inFile.close();
     
 }
 
