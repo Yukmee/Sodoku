@@ -12,7 +12,7 @@ int generateInteger(const char *string) {
     int multiplier = 1;
     for (unsigned int i = 0; i < strlen(string); i++) {
         if (string[i] > '9' || string[i] < '0') {
-            cout << "InputError! Type<int> please." << endl;
+            cout << "InputError! Type<int> and make sure it's also positive please." << endl;
             exit(0);
         }
     }
@@ -21,7 +21,7 @@ int generateInteger(const char *string) {
         multiplier *= 10;
     }
     if (integer <= 0 || integer > 1000000) {
-        cout << "InputError! Use a smaller integer please." << endl;
+        cout << "InputError! Use a smaller(or bigger) integer please." << endl;
         exit(0);
     }
     return integer;
@@ -79,11 +79,8 @@ void dfs(int x, int y) {
                 print();
                 priNumber++;
                 if (priNumber == sudokuMatrixCount) {
-                    cout << "\n*************Constructed!*************\n" << endl; // ******************DEBUG******************
                     exit(0);
                 }
-                
-                
             }
             else if (y == 8) {
                 dfs(x + 1, 0);

@@ -88,7 +88,24 @@ bool place(qpos & Q) {
     return false;
 }
 
+/// Verify whether a file exists
+bool is_file_exist(const char *fileName) {
+    ifstream infile(fileName);
+    return infile.good();
+}
+
+/// Verify there is a '/'
+bool isInside(const std::string & str, char c) {
+    return str.find(c) != std::string::npos;
+}
+
 void solve(const char *absolutePath) {
+    
+    // FIXME: Verify valid path
+    if (!is_file_exist(absolutePath) || !isInside(absolutePath, '/')) {
+        cout << "Path Error! Use a valid path please." << endl;
+		exit(0);
+	}
     
     ifstream inFile;
     inFile.open(absolutePath);
