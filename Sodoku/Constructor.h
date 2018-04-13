@@ -62,7 +62,7 @@ bool judge(int x, int y) {
     n2 *= 3;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            if (sudokuMatrix[n1 + i][n2 + j] == sudokuMatrix[x][y] && n1 + i != x&&n2 + j != y) {
+            if (sudokuMatrix[n1 + i][n2 + j] == sudokuMatrix[x][y] && n1 + i != x && n2 + j != y) {
                 return true;
             }
         }
@@ -96,7 +96,7 @@ void dfs(int x, int y) {
 
 void sudokuConstructor(int n) {
     sudokuMatrixCount = n;
-    sudokuMatrix[0][0] = 2; // (4 + 6) % 9 + 1 = 2
+    sudokuMatrix[0][0] = 3; // (4 + 6) % 9 + 1 = 2
     priNumber = 0;
     dfs(0, 1);
 }
