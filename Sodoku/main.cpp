@@ -1,8 +1,7 @@
 #include <iostream>
-
 #include "Solution.h"
 #include "Constructor.h"
-
+//#define CATCH_CONFIG_MAIN
 
 int main(int argc, const char * argv[]) {
 

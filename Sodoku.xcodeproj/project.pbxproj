@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB3346BE208114E300C4D97F /* TestFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB3346BD208114E300C4D97F /* TestFile.cpp */; };
 		FB510D4F207B79130063290E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB510D4E207B79130063290E /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FB3346BC208113B000C4D97F /* catch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
+		FB3346BD208114E300C4D97F /* TestFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestFile.cpp; sourceTree = "<group>"; };
 		FB510D4B207B79130063290E /* Sodoku */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sodoku; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB510D4E207B79130063290E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FB510D59207B954B0063290E /* Solution.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Solution.h; sourceTree = "<group>"; };
@@ -62,6 +65,8 @@
 				FB510D4E207B79130063290E /* main.cpp */,
 				FB510D5A207B95990063290E /* Constructor.h */,
 				FB510D59207B954B0063290E /* Solution.h */,
+				FB3346BC208113B000C4D97F /* catch.hpp */,
+				FB3346BD208114E300C4D97F /* TestFile.cpp */,
 			);
 			path = Sodoku;
 			sourceTree = "<group>";
@@ -97,6 +102,7 @@
 				TargetAttributes = {
 					FB510D4A207B79130063290E = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 					};
 				};
 			};
@@ -123,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB510D4F207B79130063290E /* main.cpp in Sources */,
+				FB3346BE208114E300C4D97F /* TestFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,16 +248,31 @@
 		FB510D53207B79130063290E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		FB510D54207B79130063290E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
